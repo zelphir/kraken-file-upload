@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getFiles } from '../redux/files/actions'
+import { actions, selectors } from '../redux/files'
 
-class App extends React.PureComponent {
+export class App extends React.PureComponent {
   static propTypes = {
-    files: PropTypes.shape({
-      isLoading: PropTypes.bool.isRequired,
-      data: PropTypes.array.isRequired,
-      error: PropTypes.string
-    }),
+    isLoading: PropTypes.bool.isRequired,
+    data: PropTypes.array.isRequired,
+    error: PropTypes.string,
     getFiles: PropTypes.func.isRequired
   }
 
@@ -18,7 +16,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const { data, isLoading, error } = this.props.files
+    const { data, isLoading, error } = this.props
 
     if (error) return <h2>:-( Ops, something went wrong! Try again.</h2>
 
@@ -32,10 +30,11 @@ class App extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({ files }) => ({ files })
-const mapDispatchToProps = dispatch => ({ getFiles: () => dispatch(getFiles()) })
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+    data: selectors.getFiles(state),
+    isLoading: selectors.isLoading(state),
+    error: selectors.getError(state)
+  }),
+  { getFiles: actions.getFiles }
 )(App)

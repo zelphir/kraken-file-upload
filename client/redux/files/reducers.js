@@ -2,7 +2,7 @@ import * as types from './types'
 
 export const initialState = {
   data: [],
-  isLoading: false,
+  isLoading: true,
   error: null
 }
 
