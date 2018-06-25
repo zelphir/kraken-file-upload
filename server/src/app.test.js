@@ -44,6 +44,11 @@ describe('GET /files/:filename', () => {
     expect(response.get('Content-Type')).toBe('text/plain; charset=UTF-8')
     expect(response.get('Content-Length')).toBe(size.toString())
   })
+
+  test('Should return 404 if not found', async () => {
+    const response = await request(app).get('/files/random_file_name.pdf')
+    expect(response.statusCode).toBe(404)
+  })
 })
 
 describe('DELETE /files/:filename', () => {

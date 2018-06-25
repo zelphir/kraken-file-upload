@@ -6,21 +6,18 @@ const fs = require('fs')
 const uuidv4 = require('uuid/v4')
 const Datastore = require('nedb')
 
-// Using an in-memory db to store the files references
+// Using an in-memory db to store file references
 const db = new Datastore()
 const app = express()
 
 // Create uploads folder if it doesn't exist
 const uploadDir = path.join(__dirname, process.env.UPLOAD_DIR || '../uploads')
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir)
-}
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir)
 
 app.use(helmet())
 app.use(
   fileUpload({
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 }, // max-size 5MB
     safeFileNames: true,
     preserveExtension: true,
     abortOnLimit: true
