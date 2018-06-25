@@ -21,6 +21,7 @@
   },
   "scripts": {
     "dev": "nodemon --ignore 'src/*.test.js' server.js",
+    "start": "node server.js",
     "test": "jest"
   }
 }

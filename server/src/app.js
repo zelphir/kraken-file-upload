@@ -42,6 +42,13 @@ app.get('/files/:filename?', (req, res) => {
   })
 })
 
+app.delete('/files/:filename', (req, res) => {
+  db.remove({ filename: req.params.filename }, {}, err => {
+    if (err) return res.status(500).send(err)
+    res.sendStatus(204)
+  })
+})
+
 app.post('/upload', (req, res) => {
   if (!req.files) return res.status(400).send('No files were uploaded.')
 

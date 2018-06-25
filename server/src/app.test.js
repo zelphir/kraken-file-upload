@@ -15,25 +15,25 @@ afterEach(() => {
   tmpFile.removeCallback()
 })
 
-describe('/', () => {
+describe('GET /', () => {
   test('Should return with 404', async () => {
     const response = await request(app).get('/')
     expect(response.statusCode).toBe(404)
   })
 })
 
-describe('/files', () => {
+describe('GET /files', () => {
   test('Should return the list of files', async () => {
-    await request(app)
+    const upload = await request(app)
       .post('/upload')
       .attach('upload', tmpFile.name)
     const response = await request(app).get('/files')
     expect(response.statusCode).toBe(200)
-    expect(response.body.length).toBe(1)
+    expect(response.body).toContainEqual(upload.body)
   })
 })
 
-describe('/files/:filename', () => {
+describe('GET /files/:filename', () => {
   test('Should return the file by filename param', async () => {
     const upload = await request(app)
       .post('/upload')
@@ -46,7 +46,17 @@ describe('/files/:filename', () => {
   })
 })
 
-describe('/upload', () => {
+describe('DELETE /files/:filename', () => {
+  test('Should delete the file by filename param', async () => {
+    const upload = await request(app)
+      .post('/upload')
+      .attach('upload', tmpFile.name)
+    const response = await request(app).delete(`/files/${upload.body.filename}`)
+    expect(response.statusCode).toBe(204)
+  })
+})
+
+describe('POST /upload', () => {
   test('Should upload the file', async () => {
     const response = await request(app)
       .post('/upload')
