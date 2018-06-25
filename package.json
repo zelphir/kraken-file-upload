@@ -14,13 +14,16 @@
     "prettier": "^1.13.6"
   },
   "scripts": {
+    "install:client": "cd client && $npm_execpath install",
+    "install:server": "cd server && $npm_execpath install",
+    "install:all": "$npm_execpath run install:server && $npm_execpath run install:client",
     "lint": "eslint .",
-    "precommit": "npm run lint && lint-staged"
+    "test:server": "cd server && npm t",
+    "test:client": "cd client && npm t",
+    "test:all": "npm run test:server && npm run test:client",
+    "precommit": "npm run lint && lint-staged",
+    "postinstall": "$npm_execpath run install:all"
   },
-  "workspaces": [
-    "client",
-    "server"
-  ],
   "lint-staged": {
     "**/*.{js,json,css}": [
       "prettier --write",

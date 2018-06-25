@@ -5,6 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const uuidv4 = require('uuid/v4')
 const Datastore = require('nedb')
+const cors = require('cors')
 
 // Using an in-memory db to store file references
 const db = new Datastore()
@@ -14,6 +15,7 @@ const app = express()
 const uploadDir = path.join(__dirname, process.env.UPLOAD_DIR || '../uploads')
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir)
 
+app.use(cors())
 app.use(helmet())
 app.use(
   fileUpload({

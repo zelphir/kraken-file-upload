@@ -1,0 +1,3 @@
+export const GET_FILES_START = 'GET_FILES_START'
+export const GET_FILES_SUCCESS = 'GET_FILES_SUCCESS'
+export const GET_FILES_FAIL = 'GET_FILES_FAIL'
