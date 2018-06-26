@@ -24,7 +24,7 @@ const files = (state = initialState, action) => {
       }
     case types.UPLOAD_FILE_SUCCESS:
       return {
-        data: [...state.data, action.payload],
+        data: [action.payload, ...state.data],
         isLoading: false,
         error: null
       }

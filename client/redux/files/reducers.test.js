@@ -55,7 +55,7 @@ describe('Files reducer', () => {
         payload: { filename: 3 }
       }
       expect(reducer({ ...initialState, data }, successAction)).toEqual({
-        data: [...data, { filename: 3 }],
+        data: [{ filename: 3 }, ...data],
         error: null,
         isLoading: false
       })

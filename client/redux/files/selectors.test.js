@@ -23,10 +23,8 @@ describe('Files selectors', () => {
       }
     }
 
-    expect(selectors.getFiles(newState)).toEqual([
-      { originalName: 'Myfile.txt' },
-      { originalName: 'Myfiletxt.zip' }
-    ])
+    expect(selectors.getFiles(newState)).toContainEqual({ originalName: 'Myfile.txt' })
+    expect(selectors.getFiles(newState)).toContainEqual({ originalName: 'Myfiletxt.zip' })
   })
 
   it('should get isLoading from state', () => {
