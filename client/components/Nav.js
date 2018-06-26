@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Navbar, NavbarGroup, NavbarDivider, NavbarHeading } from '@blueprintjs/core'
 import UploadButton from './UploadButton'
 
-const Nav = ({ hasData, onUpload }) => {
+const Nav = ({ hasData, hasQuery, onUpload, handleFilter }) => {
   return (
     <Navbar className="pt-dark" fixedToTop>
       <NavbarGroup>
@@ -19,10 +19,12 @@ const Nav = ({ hasData, onUpload }) => {
         <div className="pt-input-group">
           <span className="pt-icon pt-icon-search" />
           <input
+            disabled={!hasData && !hasQuery}
             className="pt-input pt-fill"
             style={{ minWidth: 240 }}
             type="search"
             placeholder="Search by name or type"
+            onChange={handleFilter}
             dir="auto"
           />
         </div>
@@ -33,7 +35,9 @@ const Nav = ({ hasData, onUpload }) => {
 
 Nav.propTypes = {
   hasData: PropTypes.bool.isRequired,
-  onUpload: PropTypes.func.isRequired
+  hasQuery: PropTypes.bool.isRequired,
+  onUpload: PropTypes.func.isRequired,
+  handleFilter: PropTypes.func.isRequired
 }
 
 export default Nav

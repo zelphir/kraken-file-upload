@@ -8,6 +8,7 @@ function setup(nextProps = {}) {
     getFiles: jest.fn(),
     deleteFile: jest.fn(),
     uploadFile: jest.fn(),
+    filterList: jest.fn(),
     ...initialState,
     ...nextProps
   }
@@ -73,5 +74,14 @@ describe('<App />', () => {
       preventDefault: jest.fn()
     })
     expect(props.uploadFile.mock.calls.length).toBe(0)
+  })
+
+  it('handleFilter should call filterList', () => {
+    const { wrapper, props } = setup()
+    wrapper.instance().handleFilter({
+      target: { value: 'a' },
+      preventDefault: jest.fn()
+    })
+    expect(props.filterList.mock.calls.length).toBe(1)
   })
 })

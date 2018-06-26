@@ -48,3 +48,5 @@ export const uploadFile = file => async dispatch => {
     dispatch(uploadFileFail(err))
   }
 }
+
+export const filterList = query => ({ type: types.FILTER_LIST, payload: query })

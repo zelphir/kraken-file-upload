@@ -5,7 +5,9 @@ import Nav from './Nav'
 function setup(nextProps = {}) {
   const props = {
     hasData: false,
+    hasQuery: false,
     onUpload: jest.fn(),
+    handleFilter: jest.fn(),
     ...nextProps
   }
   const wrapper = shallow(<Nav {...props} />)

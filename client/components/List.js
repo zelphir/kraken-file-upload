@@ -5,7 +5,10 @@ import { getClassNameForExtension } from 'font-awesome-filetypes'
 import DownloadButton from './DownloadButton'
 import UploadButton from './UploadButton'
 
-const List = ({ data, onDelete, onUpload }) => {
+const List = ({ data, onDelete, onUpload, hasQuery }) => {
+  if (!data.length && hasQuery)
+    return <NonIdealState visual="search" title="No result!" className="spacer" />
+
   return !data.length ? (
     <NonIdealState visual="folder-open" title="Your folder is empty!" className="spacer">
       <UploadButton large onUpload={onUpload} />
@@ -53,7 +56,8 @@ const List = ({ data, onDelete, onUpload }) => {
 List.propTypes = {
   data: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onUpload: PropTypes.func.isRequired
+  onUpload: PropTypes.func.isRequired,
+  hasQuery: PropTypes.bool.isRequired
 }
 
 export default List

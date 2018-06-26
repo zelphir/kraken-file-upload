@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import moxios from 'moxios'
 import * as types from './types'
-import { api, getFiles, deleteFile, uploadFile } from './actions'
+import { api, getFiles, deleteFile, uploadFile, filterList } from './actions'
 import { initialState } from './reducers'
 
 const middlewares = [thunk]
@@ -160,5 +160,16 @@ describe('uploadFile actions', () => {
 
     await store.dispatch(uploadFile(data))
     expect(store.getActions()).toEqual(expectedActions)
+  })
+})
+
+describe('filterList actions', () => {
+  it('should create an action to filter the files list', () => {
+    const query = 'txt'
+    const expectedAction = {
+      type: types.FILTER_LIST,
+      payload: query
+    }
+    expect(filterList(query)).toEqual(expectedAction)
   })
 })

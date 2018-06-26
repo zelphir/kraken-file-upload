@@ -24,6 +24,8 @@ exports[`<Nav /> should match the snapshot 1`] = `
       <input
         className="pt-input pt-fill"
         dir="auto"
+        disabled={true}
+        onChange={[MockFunction]}
         placeholder="Search by name or type"
         style={
           Object {

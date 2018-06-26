@@ -7,6 +7,7 @@ function setup(nextProps = {}) {
     data: [],
     onDelete: jest.fn(),
     onUpload: jest.fn(),
+    hasQuery: false,
     ...nextProps
   }
   const wrapper = shallow(<List {...props} />)
@@ -26,6 +27,13 @@ describe('<List />', () => {
   it('should render the empty message if no data', () => {
     const { wrapper } = setup()
     expect(wrapper.find('NonIdealState')).toHaveLength(1)
+    expect(wrapper.find('NonIdealState').props().visual).toBe('folder-open')
+  })
+
+  it('should render the no results message if no data', () => {
+    const { wrapper } = setup({ hasQuery: true })
+    expect(wrapper.find('NonIdealState')).toHaveLength(1)
+    expect(wrapper.find('NonIdealState').props().visual).toBe('search')
   })
 
   it('should render the table if data', () => {

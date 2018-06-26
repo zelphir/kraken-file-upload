@@ -3,7 +3,8 @@ import * as types from './types'
 export const initialState = {
   data: [],
   isLoading: true,
-  error: null
+  error: null,
+  query: ''
 }
 
 const files = (state = initialState, action) => {
@@ -40,6 +41,14 @@ const files = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.error.message
+      }
+    case types.FILTER_LIST:
+      return {
+        ...state,
+        query: action.payload
+        // data: state.data.filter(item => item.filename.includes(action.payload)),
+        // isLoading: false,
+        // error: null
       }
     default:
       return state

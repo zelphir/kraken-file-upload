@@ -106,4 +106,17 @@ describe('Files reducer', () => {
       })
     })
   })
+
+  describe('FILTER_LIST', () => {
+    it('should return the filtered list', () => {
+      const startAction = {
+        type: actions.FILTER_LIST,
+        payload: 'txt'
+      }
+      expect(reducer(initialState, startAction)).toEqual({
+        ...initialState,
+        query: 'txt'
+      })
+    })
+  })
 })

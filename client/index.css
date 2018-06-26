@@ -57,3 +57,9 @@ table {
 .inputfile + label > span {
   margin-left: 2px;
 }
+
+.callout {
+  margin-top: 120px;
+  background: #fff;
+  border-radius: 3px;
+}

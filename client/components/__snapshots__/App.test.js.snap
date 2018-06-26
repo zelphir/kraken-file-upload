@@ -3,11 +3,14 @@
 exports[`<App /> should match the snapshot 1`] = `
 <React.Fragment>
   <Nav
+    handleFilter={[Function]}
     hasData={false}
+    hasQuery={false}
     onUpload={[Function]}
   />
   <List
     data={Array []}
+    hasQuery={false}
     onDelete={[Function]}
     onUpload={[Function]}
   />
