@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import moxios from 'moxios'
+import MockAdapter from 'axios-mock-adapter'
 import * as types from './types'
 import { api, getFiles, deleteFile, uploadFile, filterList } from './actions'
 import { initialState } from './reducers'
@@ -8,21 +8,19 @@ import { initialState } from './reducers'
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 const mockResponse = [{ id: 1 }, { id: 2 }]
+let mock
 
 beforeEach(function() {
-  moxios.install(api)
+  mock = new MockAdapter(api)
 })
 
 afterEach(function() {
-  moxios.uninstall(api)
+  mock.reset()
 })
 
 describe('getFiles actions', () => {
   it('should execute getFiles and dispatch GET_FILES_SUCCESS', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 200, response: mockResponse })
-    })
+    mock.onGet('/files').reply(200, mockResponse)
 
     const expectedActions = [
       { type: types.GET_FILES_START },
@@ -36,10 +34,7 @@ describe('getFiles actions', () => {
   })
 
   it('should execute getFiles and dispatch GET_FILES_FAIL', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 500 })
-    })
+    mock.onGet('/files').reply(500)
 
     const expectedActions = [
       { type: types.GET_FILES_START },
@@ -55,10 +50,7 @@ describe('getFiles actions', () => {
 
 describe('deleteFile actions', () => {
   it('should execute deleteFile and dispatch DELETE_FILE_SUCCESS', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 204 })
-    })
+    mock.onDelete('/files/myFile.txt').reply(204)
 
     const expectedActions = [
       { type: types.DELETE_FILE_START },
@@ -72,10 +64,7 @@ describe('deleteFile actions', () => {
   })
 
   it('should execute deleteFile and dispatch DELETE_FILE_FAIL if no filename', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 404 })
-    })
+    mock.onDelete('/files').reply(404)
 
     const expectedActions = [
       { type: types.DELETE_FILE_START },
@@ -89,10 +78,7 @@ describe('deleteFile actions', () => {
   })
 
   it('should execute deleteFile and dispatch DELETE_FILE_FAIL if server error', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 500 })
-    })
+    mock.onDelete('/files').reply(500)
 
     const expectedActions = [
       { type: types.DELETE_FILE_START },
@@ -108,10 +94,7 @@ describe('deleteFile actions', () => {
 
 describe('uploadFile actions', () => {
   it('should execute uploadFile and dispatch UPLOAD_FILE_SUCCESS', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 200, response: { filename: '1.txt' } })
-    })
+    mock.onPost('/upload').reply(200, { filename: '1.txt' })
 
     const expectedActions = [
       { type: types.UPLOAD_FILE_START },
@@ -127,10 +110,7 @@ describe('uploadFile actions', () => {
   })
 
   it('should execute uploadFile and dispatch UPLOAD_FILE_FAIL if no file', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 400 })
-    })
+    mock.onPost('/upload').reply(400)
 
     const expectedActions = [
       { type: types.UPLOAD_FILE_START },
@@ -144,10 +124,7 @@ describe('uploadFile actions', () => {
   })
 
   it('should execute uploadFile and dispatch UPLOAD_FILE_FAIL if server error', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({ status: 500 })
-    })
+    mock.onPost('/upload').reply(500)
 
     const expectedActions = [
       { type: types.UPLOAD_FILE_START },
