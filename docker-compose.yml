@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  api:
+    env_file: .env
+    build:
+      context: ./server
+      args:
+        NODE_PORT: $NODE_PORT
+    ports:
+      - "$API_PORT:$NODE_PORT"
+
+  client:
+    build:
+      context: ./client
+      args:
+        API_HOST: $API_HOST
+        API_PORT: $API_PORT
+    ports:
+      - "$WEB_PORT:80"
