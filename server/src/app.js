@@ -52,7 +52,8 @@ app.post('/upload', (req, res) => {
   if (!req.files) return res.status(400).send('No files were uploaded.')
 
   const file = req.files.upload
-  const filename = `${uuidv4()}${path.extname(file.name)}`
+  const ext = path.extname(file.name)
+  const filename = `${uuidv4()}${ext}`
 
   file.mv(path.join(uploadDir, filename), err => {
     if (err) return res.status(500).send(err)
@@ -60,6 +61,7 @@ app.post('/upload', (req, res) => {
     const doc = {
       filename,
       originalName: file.name,
+      type: ext.replace('.', ''),
       size: file.data.byteLength / 1024 // size in kb
     }
 

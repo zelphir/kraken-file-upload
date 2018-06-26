@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Callout, Spinner } from '@blueprintjs/core'
 import { actions, selectors } from '../redux/files'
+import Nav from './Nav'
+import List from './List'
 
 export class App extends React.PureComponent {
   static propTypes = {
@@ -18,13 +21,21 @@ export class App extends React.PureComponent {
   render() {
     const { data, isLoading, error } = this.props
 
-    if (error) return <h2>:-( Ops, something went wrong! Try again.</h2>
+    if (error)
+      return (
+        <div className="spacer">
+          <Callout title="Ops, something went wrong!" intent="danger">
+            <strong>{error}:</strong> Please try again refreshing the page.
+          </Callout>
+        </div>
+      )
 
     return isLoading ? (
-      <div>loading...</div>
+      <Spinner className="spinner" />
     ) : (
       <React.Fragment>
-        {!data.length ? <h2>:-( Ops, no files found! Add one!</h2> : <div>file list</div>}
+        <Nav hasData={!!data.length} />
+        <List data={data} />
       </React.Fragment>
     )
   }

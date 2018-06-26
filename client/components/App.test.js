@@ -30,7 +30,7 @@ describe('<App />', () => {
 
   it('should render the loading message on mount', () => {
     const { wrapper } = setup()
-    expect(wrapper.text()).toBe('loading...')
+    expect(wrapper.find('Spinner')).toHaveLength(1)
   })
 
   it('should render the files list after fetching data', () => {
@@ -41,16 +41,11 @@ describe('<App />', () => {
       size: 0.05
     }
     const { wrapper } = setup({ isLoading: false, data: [file] })
-    expect(wrapper.children()).toHaveLength(1)
-  })
-
-  it('should render the no files message if empty array', () => {
-    const { wrapper } = setup({ isLoading: false, data: [] })
-    expect(wrapper.childAt(0).text()).toBe(':-( Ops, no files found! Add one!')
+    expect(wrapper.find('List')).toHaveLength(1)
   })
 
   it('should render the error message on error', () => {
     const { wrapper } = setup({ error: ':-( Ops, something went wrong! Try again.' })
-    expect(wrapper.text()).toBe(':-( Ops, something went wrong! Try again.')
+    expect(wrapper.find('Callout')).toHaveLength(1)
   })
 })
