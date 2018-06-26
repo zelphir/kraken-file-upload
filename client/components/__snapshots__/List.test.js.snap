@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List /> should match the snapshot 1`] = `
+<NonIdealState
+  className="spacer"
+  title="Your folder is empty!"
+  visual="folder-open"
+>
+  <UploadButton
+    large={true}
+    onUpload={[MockFunction]}
+  />
+</NonIdealState>
+`;

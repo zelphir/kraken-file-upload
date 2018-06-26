@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DownloadButton /> should match the snapshot 1`] = `
+<Blueprint2.AnchorButton
+  href="http://localhost:5678/files/a.txt"
+  minimal={true}
+/>
+`;

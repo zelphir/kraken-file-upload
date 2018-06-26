@@ -9,6 +9,8 @@ export const initialState = {
 const files = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_FILES_START:
+    case types.UPLOAD_FILE_START:
+    case types.DELETE_FILE_START:
       return {
         ...state,
         isLoading: true
@@ -19,7 +21,21 @@ const files = (state = initialState, action) => {
         isLoading: false,
         error: null
       }
+    case types.UPLOAD_FILE_SUCCESS:
+      return {
+        data: [...state.data, action.payload],
+        isLoading: false,
+        error: null
+      }
+    case types.DELETE_FILE_SUCCESS:
+      return {
+        data: state.data.filter(item => item.filename !== action.payload),
+        isLoading: false,
+        error: null
+      }
     case types.GET_FILES_FAIL:
+    case types.UPLOAD_FILE_FAIL:
+    case types.DELETE_FILE_FAIL:
       return {
         ...state,
         isLoading: false,

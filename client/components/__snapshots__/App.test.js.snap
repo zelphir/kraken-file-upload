@@ -1,7 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> should match the snapshot 1`] = `
-<Blueprint2.Spinner
-  className="spinner"
-/>
+<React.Fragment>
+  <Nav
+    hasData={false}
+    onUpload={[Function]}
+  />
+  <List
+    data={Array []}
+    onDelete={[Function]}
+    onUpload={[Function]}
+  />
+  <Blueprint2.Overlay
+    autoFocus={true}
+    backdropProps={Object {}}
+    canEscapeKeyClose={true}
+    canOutsideClickClose={true}
+    enforceFocus={true}
+    hasBackdrop={true}
+    isOpen={true}
+    lazy={true}
+    transitionDuration={50}
+    transitionName="pt-overlay"
+    usePortal={true}
+  >
+    <Blueprint2.Spinner
+      className="spinner"
+    />
+  </Blueprint2.Overlay>
+</React.Fragment>
 `;

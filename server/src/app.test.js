@@ -59,6 +59,11 @@ describe('DELETE /files/:filename', () => {
     const response = await request(app).delete(`/files/${upload.body.filename}`)
     expect(response.statusCode).toBe(204)
   })
+
+  test('Should throw an error (400) if no file', async () => {
+    const response = await request(app).delete(`/files`)
+    expect(response.statusCode).toBe(404)
+  })
 })
 
 describe('POST /upload', () => {

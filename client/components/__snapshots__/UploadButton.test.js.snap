@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UploadButton /> should match the snapshot 1`] = `
+<React.Fragment>
+  <input
+    className="inputfile"
+    id="file"
+    name="file"
+    onChange={[MockFunction]}
+    type="file"
+  />
+  <label
+    className="pt-button pt-intent-primary"
+    htmlFor="file"
+  >
+    <Blueprint2.Icon
+      icon="upload"
+    />
+    <span>
+      Upload a new file!
+    </span>
+  </label>
+</React.Fragment>
+`;

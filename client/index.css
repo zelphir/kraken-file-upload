@@ -15,7 +15,7 @@
 }
 
 .spinner {
-  margin-top: 20px;
+  margin-top: 120px;
 }
 
 .fa {
@@ -24,10 +24,36 @@
 }
 
 .filename {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 table {
   width: 100%;
   border-bottom: 1px solid rgba(16, 22, 26, 0.15);
+}
+
+.pt-overlay {
+  display: flex;
+  justify-content: center;
+}
+
+.delete span {
+  display: none;
+}
+
+.delete svg {
+  margin-right: 0;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label > span {
+  margin-left: 2px;
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Navbar, NavbarGroup, NavbarDivider, NavbarHeading, Button } from '@blueprintjs/core'
+import { Navbar, NavbarGroup, NavbarDivider, NavbarHeading } from '@blueprintjs/core'
+import UploadButton from './UploadButton'
 
-const Nav = ({ hasData }) => {
+const Nav = ({ hasData, onUpload }) => {
   return (
     <Navbar className="pt-dark" fixedToTop>
       <NavbarGroup>
@@ -10,7 +11,7 @@ const Nav = ({ hasData }) => {
         {hasData && (
           <React.Fragment>
             <NavbarDivider />
-            <Button icon="upload" text="Upload a new file" intent="primary" />
+            <UploadButton onUpload={onUpload} />
           </React.Fragment>
         )}
       </NavbarGroup>
@@ -31,7 +32,8 @@ const Nav = ({ hasData }) => {
 }
 
 Nav.propTypes = {
-  hasData: PropTypes.bool.isRequired
+  hasData: PropTypes.bool.isRequired,
+  onUpload: PropTypes.func.isRequired
 }
 
 export default Nav

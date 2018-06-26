@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, NonIdealState, Tag } from '@blueprintjs/core'
 import { getClassNameForExtension } from 'font-awesome-filetypes'
+import DownloadButton from './DownloadButton'
+import UploadButton from './UploadButton'
 
-const List = ({ data }) => {
+const List = ({ data, onDelete, onUpload }) => {
   return !data.length ? (
     <NonIdealState visual="folder-open" title="Your folder is empty!" className="spacer">
-      <Button large icon="upload" text="Upload a new file" intent="primary" />
+      <UploadButton large onUpload={onUpload} />
     </NonIdealState>
   ) : (
     <table className="pt-html-table pt-html-table-striped">
@@ -21,16 +23,25 @@ const List = ({ data }) => {
           <tr key={file._id}>
             <td>
               <i className={`fa ${getClassNameForExtension(file.type)} fa-lg`} />
-              <Button minimal className="filename">
+              <DownloadButton className="filename" filename={file.filename}>
                 {file.originalName}
-              </Button>
+              </DownloadButton>
               <Tag minimal>
                 <em>{Math.round(file.size * 100) / 100}kb</em>
               </Tag>
             </td>
             <td>
-              <Button minimal icon="download" intent="primary" />
-              <Button minimal icon="delete" intent="danger" />
+              <DownloadButton icon="download" intent="primary" filename={file.filename} />
+              <Button
+                minimal
+                className="delete"
+                icon="delete"
+                intent="danger"
+                onClick={onDelete}
+                value={file.filename}
+              >
+                {file.filename}
+              </Button>
             </td>
           </tr>
         ))}
@@ -40,7 +51,9 @@ const List = ({ data }) => {
 }
 
 List.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired
 }
 
 export default List

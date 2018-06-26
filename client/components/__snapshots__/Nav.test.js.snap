@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Nav /> should match the snapshot 1`] = `
+<Blueprint2.Navbar
+  className="pt-dark"
+  fixedToTop={true}
+>
+  <Blueprint2.NavbarGroup
+    align="left"
+  >
+    <Blueprint2.NavbarHeading>
+      Kraken test
+    </Blueprint2.NavbarHeading>
+  </Blueprint2.NavbarGroup>
+  <Blueprint2.NavbarGroup
+    align="right"
+  >
+    <div
+      className="pt-input-group"
+    >
+      <span
+        className="pt-icon pt-icon-search"
+      />
+      <input
+        className="pt-input pt-fill"
+        dir="auto"
+        placeholder="Search by name or type"
+        style={
+          Object {
+            "minWidth": 240,
+          }
+        }
+        type="search"
+      />
+    </div>
+  </Blueprint2.NavbarGroup>
+</Blueprint2.Navbar>
+`;

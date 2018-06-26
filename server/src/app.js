@@ -42,6 +42,7 @@ app.get('/files/:filename?', (req, res) => {
 })
 
 app.delete('/files/:filename', (req, res) => {
+  fs.unlinkSync(path.join(uploadDir, req.params.filename))
   db.remove({ filename: req.params.filename }, {}, err => {
     if (err) return res.status(500).send(err)
     res.sendStatus(204)

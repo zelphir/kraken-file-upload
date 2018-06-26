@@ -6,6 +6,8 @@ import { initialState } from '../redux/files/reducers'
 function setup(nextProps = {}) {
   const props = {
     getFiles: jest.fn(),
+    deleteFile: jest.fn(),
+    uploadFile: jest.fn(),
     ...initialState,
     ...nextProps
   }
@@ -47,5 +49,29 @@ describe('<App />', () => {
   it('should render the error message on error', () => {
     const { wrapper } = setup({ error: ':-( Ops, something went wrong! Try again.' })
     expect(wrapper.find('Callout')).toHaveLength(1)
+  })
+
+  it('handleDeleteFile should call deleteFile', () => {
+    const { wrapper, props } = setup()
+    wrapper.instance().handleDeleteFile({ currentTarget: { value: 1 }, preventDefault: jest.fn() })
+    expect(props.deleteFile.mock.calls.length).toBe(1)
+  })
+
+  it('handleUploadFile should call uploadFile', () => {
+    const { wrapper, props } = setup()
+    wrapper.instance().handleUploadFile({
+      target: { files: [{ file: Buffer.alloc(1) }], length: 1 },
+      preventDefault: jest.fn()
+    })
+    expect(props.uploadFile.mock.calls.length).toBe(1)
+  })
+
+  it('handleUploadFile should not call uploadFile if files.length === 0', () => {
+    const { wrapper, props } = setup()
+    wrapper.instance().handleUploadFile({
+      target: { files: [], length: 0 },
+      preventDefault: jest.fn()
+    })
+    expect(props.uploadFile.mock.calls.length).toBe(0)
   })
 })
