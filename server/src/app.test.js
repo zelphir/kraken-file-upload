@@ -81,13 +81,4 @@ describe('POST /upload', () => {
       .attach('upload', '')
     expect(response.statusCode).toBe(400)
   })
-
-  test('Should throw an error if file size > 5MB', async () => {
-    fs.writeSync(tmpFile.fd, Buffer.alloc(6 * 1024 * 1024))
-
-    const response = await request(app)
-      .post('/upload')
-      .attach('upload', tmpFile.name)
-    expect(response.statusCode).toBe(413)
-  })
 })

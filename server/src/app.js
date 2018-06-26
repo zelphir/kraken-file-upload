@@ -19,7 +19,6 @@ app.use(cors())
 app.use(helmet())
 app.use(
   fileUpload({
-    limits: { fileSize: 5 * 1024 * 1024 }, // max-size 5MB
     safeFileNames: true,
     preserveExtension: true,
     abortOnLimit: true
