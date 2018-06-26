@@ -2,11 +2,9 @@ version: "3"
 
 services:
   api:
-    env_file: .env
-    build:
-      context: ./server
-      args:
-        NODE_PORT: $NODE_PORT
+    build: ./server
+    environment:
+      NODE_PORT: $NODE_PORT
     ports:
       - "$API_PORT:$NODE_PORT"
 
