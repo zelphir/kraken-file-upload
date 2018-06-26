@@ -9,6 +9,10 @@ exports[`<Nav /> should match the snapshot 1`] = `
     align="left"
   >
     <Blueprint2.NavbarHeading>
+      <img
+        className="logo"
+        src={null}
+      />
       Kraken test
     </Blueprint2.NavbarHeading>
   </Blueprint2.NavbarGroup>

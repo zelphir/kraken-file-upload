@@ -63,3 +63,8 @@ table {
   background: #fff;
   border-radius: 3px;
 }
+
+.logo {
+  width: 16px;
+  margin-right: 5px;
+}

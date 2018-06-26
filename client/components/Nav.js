@@ -2,12 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Navbar, NavbarGroup, NavbarDivider, NavbarHeading } from '@blueprintjs/core'
 import UploadButton from './UploadButton'
+import logo from './kraken.png'
 
 const Nav = ({ hasData, hasQuery, onUpload, handleFilter }) => {
   return (
     <Navbar className="pt-dark" fixedToTop>
       <NavbarGroup>
-        <NavbarHeading>Kraken test</NavbarHeading>
+        <NavbarHeading>
+          <img src={logo} className="logo" />Kraken test
+        </NavbarHeading>
         {hasData && (
           <React.Fragment>
             <NavbarDivider />
